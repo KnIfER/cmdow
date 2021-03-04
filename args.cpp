@@ -1,4 +1,5 @@
 #include "header.h"
+#include <iostream>
 
 void ParseArgs(int argc, char *argv[], struct ARGS *a)
 {
@@ -123,7 +124,9 @@ void ParseArgs(int argc, char *argv[], struct ARGS *a)
 			//
 			if( !( ( (i++) +1 ) < argc)) Quit(INCARG);
 			if(!lstrcmpi("/MIN", argv[i])) a->sw_state = SW_SHOWMINIMIZED;
-			else if(!lstrcmpi("/MAX", argv[i])) a->sw_state = SW_SHOWMAXIMIZED;
+			else if(!lstrcmpi("/MAX", argv[i])) {
+				a->sw_state = SW_SHOWMAXIMIZED;
+			}
 			else if(!lstrcmpi("/HID", argv[i])) a->sw_state = SW_HIDE;
 			else --i;
 			//
@@ -248,6 +251,7 @@ int IsTask(enum TASK tasks[], enum TASK t)
 
 HWND atoHandle(const char *src)
 {
+	std::cout<<"atoHandle"<<src<<std::endl;
 	char *p;
 	HWND h;
 

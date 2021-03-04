@@ -1,4 +1,7 @@
 #include "header.h"
+#include "stdio.h"
+#include <fstream>
+#include <iostream>
 
 #ifdef __MINGW32__
 int _CRT_glob = 0;
@@ -22,10 +25,21 @@ int main(int argc, char* argv[])
 	wlist.next = NULL; // init wlist
 	int wcount = 0; // keep track of how many windows acted upon
 
+	static std::ofstream g_log("D:\\Downloads\\cmdow\\bin\\out.log");
+	std::cout.rdbuf(g_log.rdbuf());
+
+	for(int i=0;i<argc;i++) {
+		std::cout << argv[i] << " ";
+	}
+
 	//
 	// parse and load the commandline options into the args struct
 	//
 	ParseArgs(argc, argv, &args);
+
+	std::cout <<  std::endl << args.hwnd << std::endl;
+
+	std::cout << std::endl;
 
 	//
 	// The tasks in this switch statement are single (one off) tasks
@@ -90,6 +104,8 @@ int main(int argc, char* argv[])
 		default: done = FALSE;
 	}
 
+
+	std::cout << "111" << " ";
 	//
 	// all tasks onwards may operate on multiple windows (may be multiple tasks)
 	//
@@ -172,6 +188,7 @@ int main(int argc, char* argv[])
 			if(!wtlist.next) Quit(NOTFND);
 		}
 
+		std::cout << "122" << " ";
 		//
 		// perform all the tasks in the task queue on the specified window(s)
 		//
@@ -203,11 +220,13 @@ int main(int argc, char* argv[])
 					case NOT: fp = NotWin; break;
 					default: fp = 0;
 				}
+
 				//
 				// check if window still exists and also update its info, as it could be out
 				// of date by now, eg window could have been moved/resized
 				//
 				if(!GetWindowInf(w->hwnd, w)) Quit(NOTFND);
+
 
 				//
 				// perform task on specified window
@@ -215,7 +234,12 @@ int main(int argc, char* argv[])
 				fp(w, &args);
 			}
 			w = w->next;
+
 		} while (w);
 	}
+
+
+	std::cout << "222" << " ";
+
 	return(0);
 }

@@ -1,4 +1,5 @@
 #include "header.h"
+#include <iostream>
 
 static HWND  max_handle;
 static int	 max_level;
@@ -347,9 +348,22 @@ void MaxWin(struct WLIST *w, struct ARGS *a)
 	//
 	// just in case maximized window gets focus, activate window that had focus
 	//
+	std::cout<<"MaxWin…";
 	tmp = GetForegroundWindow();
 	ShowWindowAsync(w->hwnd, SW_MAXIMIZE);
-	if(tmp != GetForegroundWindow()) SetFGWindow(tmp);
+
+	SetForegroundWindow(w->hwnd);
+
+	//HWND hForgroundWnd = GetForegroundWindow();
+	//DWORD dwForeID = ::GetWindowThreadProcessId(hForgroundWnd, NULL);
+	//DWORD dwCurID = ::GetCurrentThreadId();
+	//::AttachThreadInput(dwCurID, dwForeID, TRUE);
+	//::SetForegroundWindow(w->hwnd);
+	//::AttachThreadInput(dwCurID, dwForeID, FALSE);
+
+	SetFGWindow(w->hwnd);
+	//if(tmp != GetForegroundWindow()) SetFGWindow(tmp);
+
 }
 
 //
@@ -494,7 +508,7 @@ void RenWin(struct WLIST *w, struct ARGS *a)
 	//
 	// Build the commandline to rename this console window
 	//
-	ltoa((long) a->myhwnd, buf, 16);
+	_ltoa_s((long) a->myhwnd, buf, 16);
 
 	i = lstrlen(a->exename);
 	i += lstrlen(" 0x");
