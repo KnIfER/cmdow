@@ -3,11 +3,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LocalDebuggerCommand>$(ProjectDir)../bin/$(TargetName)$(TargetExt)</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>0x03148E /max</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>0x03148E /BEEP</LocalDebuggerCommandArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommand>$(ProjectDir)../bin/$(TargetName)$(TargetExt)</LocalDebuggerCommand>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>0x03148E /max</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>0x03148E /BEEP</LocalDebuggerCommandArguments>
   </PropertyGroup>
 </Project>

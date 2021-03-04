@@ -50,7 +50,7 @@ enum TASK {
 	REN, MOV, SIZ,
 	CLS, END, RUN,
 	TOP, NOT,
-	RCW
+	RCW, BEEP
 };
 
 enum LISTOPTS {
@@ -133,6 +133,7 @@ void MaxWin(struct WLIST *w, struct ARGS *a);
 void MinWin(struct WLIST *w, struct ARGS *a);
 void ResWin(struct WLIST *w, struct ARGS *a);
 void ActWin(struct WLIST *w, struct ARGS *a);
+void BeepWin(struct WLIST *w, struct ARGS *a);
 void EnaWin(struct WLIST *w, struct ARGS *a);
 void InaWin(struct WLIST *w, struct ARGS *a);
 void DisWin(struct WLIST *w, struct ARGS *a);

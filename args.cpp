@@ -66,6 +66,7 @@ void ParseArgs(int argc, char *argv[], struct ARGS *a)
 		else if(!lstrcmpi("/MAX", argv[i])) PushTask(a->tasks, MAX);
 		else if(!lstrcmpi("/RES", argv[i])) PushTask(a->tasks, RES);
 		else if(!lstrcmpi("/ACT", argv[i])) PushTask(a->tasks, ACT);
+		else if(!lstrcmpi("/BEEP", argv[i])) PushTask(a->tasks, BEEP);
 		else if(!lstrcmpi("/INA", argv[i])) PushTask(a->tasks, INA);
 		else if(!lstrcmpi("/ENA", argv[i])) PushTask(a->tasks, ENA);
 		else if(!lstrcmpi("/DIS", argv[i])) PushTask(a->tasks, DIS);
@@ -251,7 +252,7 @@ int IsTask(enum TASK tasks[], enum TASK t)
 
 HWND atoHandle(const char *src)
 {
-	std::cout<<"atoHandle"<<src<<std::endl;
+	// 转换窗口句柄 std::cout<<"atoHandle"<<src<<std::endl;
 	char *p;
 	HWND h;
 

@@ -398,8 +398,58 @@ void ResWin(struct WLIST *w, struct ARGS *a)
 //
 void ActWin(struct WLIST *w, struct ARGS *a)
 {
-	SetFGWindow(w->hwnd);
+	// 激活窗口
+	if(IsIconic(w->hwnd)) {
+		ResWin(w, a);
+	}
+	//SetFGWindow(w->hwnd);
+
+	HWND hForgroundWnd = GetForegroundWindow();
+	DWORD dwForeID = ::GetWindowThreadProcessId(hForgroundWnd, NULL);
+	DWORD dwCurID = ::GetCurrentThreadId();
+	::AttachThreadInput(dwCurID, dwForeID, TRUE);
+	::SetForegroundWindow(w->hwnd);
+	::AttachThreadInput(dwCurID, dwForeID, FALSE);
 }
+
+
+#include "beep.h"
+
+#include <mmeapi.h>
+
+void BeepWin(struct WLIST *w, struct ARGS *a)
+{
+	//Beep(N5, C); Beep(N5, C); Beep(turn, C); Beep(N5, C); Beep(N5, C);
+	//Beep(L1, B);
+
+	unsigned long result;
+	HMIDIOUT handle;
+	result = midiOutOpen(&handle, 0, 0, 0, CALLBACK_NULL);
+	if (result)
+	{
+		printf("There is an error opening the default MIDI out device!/n");
+	}
+	/* Output the C note (ie, sound the note) */
+	midiOutShortMsg(handle, 0x00403C90);
+	Sleep(220);
+	/* Output the E note */
+	//midiOutShortMsg(handle, 0x00404090);
+	//Sleep(800);
+	/* Output the G note */
+	midiOutShortMsg(handle, 0x00404390);
+	Sleep(800);
+	/* Here you should insert a delay so that you can hear the notes sounding */
+	/* Now let's turn off those 3 notes */
+
+	// You should know this bad way to turn off MIDI, maybe it's wrong, but you don't hear the sound. yes?
+	midiOutShortMsg(handle, 0x00003C90);
+	midiOutShortMsg(handle, 0x00004090);
+	midiOutShortMsg(handle, 0x00004390);
+	/* Close the MIDI device */
+	midiOutClose(handle);
+
+}
+
 
 //
 // Inactivate window

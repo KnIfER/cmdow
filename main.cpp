@@ -206,6 +206,7 @@ int main(int argc, char* argv[])
 					case MAX: fp = MaxWin; break;
 					case RES: fp = ResWin; break;
 					case ACT: fp = ActWin; break;
+					case BEEP: fp = BeepWin; break;
 					case ENA: fp = EnaWin; break;
 					case INA: fp = InaWin; break;
 					case DIS: fp = DisWin; break;

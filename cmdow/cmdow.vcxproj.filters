@@ -40,5 +40,8 @@
     <ClInclude Include="..\header.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\beep.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
